@@ -1,1 +1,0 @@
-export const sidebarData = {"/computer/web/":["page.md"],"/post/":["README.md","info.md"],"/share/":["README.md","navigation.md"]}
