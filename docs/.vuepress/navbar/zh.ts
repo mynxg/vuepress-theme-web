@@ -46,7 +46,6 @@ export const zhNavbar = navbar([
     icon: "creative",
     prefix: "/recommend/",
     children: [
-      "",
       "/tool/",
       {
         text: "快捷查找",
