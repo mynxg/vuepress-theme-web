@@ -66,10 +66,21 @@ export const zhSidebar = sidebar({
       prefix: "web/",
       //自动收缩
       collapsable: true,
+      children: [
+        "js/",
+        "page",
+      ],
+    },//前端
+    {
+      text: "android",
+      icon: "note",
+      prefix: "android/",
+      //自动收缩
+      collapsable: true,
       children: "structure",
     },
   ],
   "/post/": "structure",
   "/share/": "structure",
-
+  "/note": "structure",
 });

@@ -19,17 +19,17 @@ export const zhNavbar = navbar([
       {
         text: "后端",
         icon: "config",
-        children: ["java/", ""],
+        children: ["java/",],
       },
       {
         text: "运维",
         icon: "config",
-        children: ["linux/", ""],
+        children: ["linux/", ],
       },
       {
         text: "Android",
         icon: "config",
-        children: ["android/","/"],
+        children: ["android/",],
       }
     ],
   },
@@ -39,6 +39,11 @@ export const zhNavbar = navbar([
     prefix: "/share/",
     // 导航栏链接 放在这里
     children: [
+      {
+        text: "导航",
+        icon: "creative",
+        link: "navigation"
+      },
       {
         text: "github",
         icon: "creative",
