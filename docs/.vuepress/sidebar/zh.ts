@@ -70,7 +70,8 @@ export const zhSidebar = sidebar({
         "js/",
         "page",
       ],
-    },//前端
+    },
+    //Android
     {
       text: "android",
       icon: "note",
