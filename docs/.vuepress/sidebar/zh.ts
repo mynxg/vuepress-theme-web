@@ -58,7 +58,7 @@ export const zhSidebar = sidebar({
       //自动收缩
       collapsable: true,
       //自动生成目录结构
-      children: ["","page"],
+      children: ["","page","git"],
     },
     //前端
     {
