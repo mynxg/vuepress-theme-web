@@ -8,5 +8,5 @@ icon: creative
 编写java，...     
 ## 详情
 
-- [page](/java/spring/page.md)
+- [springmvc](/java/spring/springmvc.md)
 - ...

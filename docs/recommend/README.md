@@ -1,5 +1,5 @@
 ---
-title: 工具的使用---开发中
+title: 工具的推荐
 icon: creative
 
 ---
@@ -8,5 +8,5 @@ icon: creative
 
 ### Foo
 
-- [tool](tool/tool.md)
+- [tool](tool.md)
 - ...

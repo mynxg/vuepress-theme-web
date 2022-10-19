@@ -10,5 +10,5 @@ icon: creative
 
 ## 详情
 
-- [baz](baz.md)
+- [介绍](info.md)
 - ...

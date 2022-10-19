@@ -33,7 +33,7 @@ export const zhSidebar = sidebar({
       icon: "note",
       prefix: "share/",
       collapsable: true,
-      children: [ "read"],
+      children: "structure",
     },
   ],
   //资料整理
@@ -46,7 +46,6 @@ export const zhSidebar = sidebar({
       //自动收缩
       collapsable: true,
       children: [
-        "read",
         "javaweb/",
         "spring/",
       ]

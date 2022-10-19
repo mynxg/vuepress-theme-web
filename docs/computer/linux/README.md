@@ -1,13 +1,13 @@
 ---
-title: Linux
+title: Linux导航
 icon: creative
 ---
 
 ## 介绍
 
-我们开发友情链接 功能         --------------- ...
+Linux年纪
 
 ## 详情
 
-- [baz](hello.md)
-- ...
+- [git](git.md)
+- [page](page.md)
