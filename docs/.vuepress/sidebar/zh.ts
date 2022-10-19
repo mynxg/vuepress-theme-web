@@ -85,7 +85,6 @@ export const zhSidebar = sidebar({
         collapsable: true,
         children: "structure",
       },
-        "page",
       ],
     },
     //Android

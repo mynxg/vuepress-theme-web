@@ -11,10 +11,9 @@ author: nxg
 date: 2022-09-28
 # 一个页面可以有多个分类
 category:
-  - js
+  - 前端
 # 一个页面可以有多个标签
 tag:
-  - html
   - js
 # 此页面会在文章列表置顶
 sticky: true

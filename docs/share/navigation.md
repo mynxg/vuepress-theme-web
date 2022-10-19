@@ -21,7 +21,6 @@ features:
   - title: 编程导航
     details: 发现优质编程学习资源
     link: https://www.code-nav.cn
-
 ---
 
 ## 介绍
