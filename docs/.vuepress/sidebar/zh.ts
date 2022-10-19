@@ -8,7 +8,7 @@ export const zhSidebar = sidebar({
       text: "个人总结",
       prefix: "note/",
       collapsable: true,
-      children: ["", "blog/"],
+      children: ["info", ""],
     },
     {
       text: "随记博客",
@@ -18,7 +18,7 @@ export const zhSidebar = sidebar({
       collapsable: true,
       children: [
         "info",
-        "note/",
+        "",
       ],
     },
     {

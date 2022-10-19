@@ -3,7 +3,7 @@ title: 经验总结
 icon: creative
 index: false
 category:
-  - 介绍
+  - 总结
 tag:
   - 介绍
 ---
