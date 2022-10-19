@@ -45,9 +45,21 @@ export const zhSidebar = sidebar({
       prefix: "java/",
       //自动收缩
       collapsable: true,
-      children: [
-        "javaweb/",
-        "spring/",
+      children: [{
+        text: "javaweb",
+        prefix: "javaweb/",
+        //自动收缩
+        collapsable: true,
+
+        children: "structure",
+      },
+      {
+        text: "spring",
+        prefix: "spring/",
+        //自动收缩
+        collapsable: true,
+        children: "structure",
+      }
       ]
     },
     {
@@ -57,7 +69,7 @@ export const zhSidebar = sidebar({
       //自动收缩
       collapsable: true,
       //自动生成目录结构
-      children: ["","page","git"],
+      children: "structure",
     },
     //前端
     {
@@ -66,8 +78,13 @@ export const zhSidebar = sidebar({
       prefix: "web/",
       //自动收缩
       collapsable: true,
-      children: [
-        "js/",
+      children: [{
+        text: "javascript",
+        prefix: "js/",
+        //自动收缩
+        collapsable: true,
+        children: "structure",
+      },
         "page",
       ],
     },
