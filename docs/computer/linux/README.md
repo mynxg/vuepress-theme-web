@@ -1,5 +1,5 @@
 ---
-title: Linux导航
+title: Linux
 icon: creative
 ---
 

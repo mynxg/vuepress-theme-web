@@ -19,8 +19,18 @@ export const zhNavbar = navbar([
       {
         text: "后端",
         icon: "config",
-        children: ["java/", "linux/"],
+        children: ["java/", ""],
       },
+      {
+        text: "运维",
+        icon: "config",
+        children: ["linux/", ""],
+      },
+      {
+        text: "Android",
+        icon: "config",
+        children: ["android/","/"],
+      }
     ],
   },
   {
