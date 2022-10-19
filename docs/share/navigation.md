@@ -1,6 +1,14 @@
 ---
+home: false
+icon: home
 title: 分享介绍
-icon: creative
+heroImage: /logo.png
+heroText: 
+tagline: 
+actions:
+  - text: 快速了解 💡
+    link: /computer/web/
+    type: primary
 features:
   - title: 导航
     icon: markdown
