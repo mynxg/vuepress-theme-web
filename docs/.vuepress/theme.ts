@@ -4,11 +4,11 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://hisnxg.github.io/v2",
+  hostname: "https://mynxg.github.io",
 
   author: {
     name: "hisnxg",
-    url: "https://hisnxg.gitee.io",
+    url: "",
   },
   // 生成图标文件
   iconAssets: "iconfont",
