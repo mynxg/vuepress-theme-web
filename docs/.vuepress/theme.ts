@@ -40,7 +40,7 @@ export default hopeTheme({
       // sidebar 侧边导航
       sidebar: zhSidebar,
 
-      footer: "默认页脚",
+      footer: "Copyright © 2022-present Mr.keney",
 
       displayFooter: true,
 
@@ -53,8 +53,8 @@ export default hopeTheme({
   //导航位置
   navbarLayout: {
     left: ["Brand"],
-    center: ["Search", "Links"],
-    right: ["Language", "Repo", "Outlook"],
+    center: ["Links"],
+    right: ["Language", "Repo", "Outlook","Search"],
   },
   //显示边栏
   sidebar: "heading",
