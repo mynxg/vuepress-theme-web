@@ -18,9 +18,9 @@ export default defineUserConfig({
   theme,//已经配置了
   plugins: [
     docsearchPlugin({
-      appId: "LDBQGQC8Q9",
-      apiKey: "5c3a7145aeba231c3b85b742d24fc24f",
-      indexName: "mrhope",
+      appId: "",
+      apiKey: "",
+      indexName: "",
       locales: {
         "/": {
           placeholder: "搜索",
