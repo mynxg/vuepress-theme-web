@@ -247,7 +247,7 @@ ssh-keygen -t rsa -C "2011465907@qq.com" -f ~/.ssh/id_rsa
 
 效果如图所示：
 
-![image-20221101000544601](https://gitee.com/hisnxg/typora-picture/raw/master/typora/202211010006324.png)
+![image-20221101000544601](./assets/202211010006324.png)
 
 > **ssh-keygen常用参数说明:**
 >
@@ -264,3 +264,6 @@ ssh-keygen -t rsa -C "2011465907@qq.com" -f ~/.ssh/id_rsa
 # 附件
 
 git单一账号使用教程
+
+![image-20221101205959465](https://gitee.com/hisnxg/typora-picture/raw/master/typora/202211012100103.png)
+
