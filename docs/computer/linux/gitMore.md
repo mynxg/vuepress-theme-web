@@ -27,11 +27,11 @@ tag:
 
 如下图所示：
 
-![image-20221031222311849](assets/image-20221031222311849.png)
+![image-20221031222311849](./assets/image-20221031222311849.png)
 
 打开之后使用这个界面：
 
-![image-20221031222421017](assets/image-20221031222421017.png)
+![image-20221031222421017](./assets/image-20221031222421017.png)
 
 **注意：**这路径C:\Users\nxg\.ssh对于有一定基础的根据上图是能看明白，就不再赘述了。
 
@@ -79,7 +79,7 @@ Host gitee.com #自己的码云地址
 
 效果如图所示：
 
-![image-20221031224144979](assets/image-20221031224144979.png)
+![image-20221031224144979](./assets/image-20221031224144979.png)
 
 > “#”  表示注释
 > Host  后面是名称，可以随便写，相当于起了一个别名
@@ -120,15 +120,15 @@ ssh-keygen -t rsa -C "123456@qq.com"
 
 如下图效果：
 
-![image-20221031232651471](assets/image-20221031232651471.png)
+![image-20221031232651471](./assets/image-20221031232651471.png)
 
 配置gitee效果如下图所示：
 
-![image-20221031232222217](assets/image-20221031232222217.png)
+![image-20221031232222217](./assets/image-20221031232222217.png)
 
 注意：生成密钥文件需要与这里保持一致
 
-![image-20221031233525370](assets/image-20221031233525370.png)
+![image-20221031233525370](./assets/image-20221031233525370.png)
 
 ## 测试是否连接成功
 
@@ -160,7 +160,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 注意事项：
 
-![image-20221031234333269](assets/image-20221031234333269.png)
+![image-20221031234333269](./assets/image-20221031234333269.png)
 
 # 四、关联github
 
@@ -172,11 +172,11 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 注：上面的文件都在
 
-![image-20221101162514113](assets/image-20221101162514113.png)
+![image-20221101162514113](./assets/image-20221101162514113.png)
 
 效果如下图所示：
 
-![image-20221101162133360](assets/image-20221101162133360.png)
+![image-20221101162133360](./assets/image-20221101162133360.png)
 
 # 注意
 
@@ -188,7 +188,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 首先需要在这C:\Users\nxg路径下，找到**.gitconfig**文件，并打开此文件
 
-![image-20221031235250843](assets/image-20221031235250843.png)
+![image-20221031235250843](./assets/image-20221031235250843.png)
 
 注意：别直接双击打开，需要选择打开方式，选文本打开，或者其他编辑工具打开。
 
@@ -213,7 +213,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 效果如下图所示：
 
-![image-20221031235759564](assets/image-20221031235759564.png)
+![image-20221031235759564](./assets/image-20221031235759564.png)
 
 ## 查看账号列表：
 
@@ -223,7 +223,7 @@ git config --global --list
 
 效果如图所示：
 
-![image-20221101000219730](assets/image-20221101000219730.png)
+![image-20221101000219730](./assets/image-20221101000219730.png)
 
 
 
@@ -237,7 +237,7 @@ ssh-keygen -t rsa -C "123456@qq.com"
 
 再执行 **id_rsa**
 
-![image-20221031232651471](assets/image-20221031232651471.png)
+![image-20221031232651471](./assets/image-20221031232651471.png)
 
 方式二：
 
