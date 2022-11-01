@@ -8,14 +8,13 @@ category:
   - 运维
 tag:
   - git
-
 ---
 
-# 一、背景
+## 一、背景
 
 ​		在同一台电脑上有时候需要使用多个GitHub、gitee、gitlab账号，或者说你有多个账号，不想来回生成公钥，那么这就需要使用到git配置多账户了。
 
-# 二、准备
+## 二、准备
 
 环境：window 10、git		
 
@@ -37,11 +36,9 @@ tag:
 
 ​		为什么先执行这一步呢？原因是这样的在你创建config文件，生成密钥时都需要创建在这个**.ssh**目录（文件夹）下。如果你在其他目录下打开，那你就需要考虑创建文件时的路径问题了。为了方便明了，就使用上述方法操作，省时省力。
 
+## 三、配置
 
-
-# 三、配置
-
-## 3.1 创建config文件
+### 3.1 创建config文件
 
 在C:\Users\nxg\.ssh目录（文件夹）下创建config文件，并且配置ssh key的路由策略。
 
@@ -96,9 +93,7 @@ Host gitee.com #自己的码云地址
 > `IdentityFile`：指定本次连接使用的密钥文件。 该host后台配置的公钥对应的私钥地址的绝对路径
 > Port ： SSH默认端口号为22，某些私有部署的git仓库会更换端口号
 
-
-
-## 3.2 全局配置
+### 3.2 全局配置
 
 以github为例：
 
@@ -130,7 +125,7 @@ ssh-keygen -t rsa -C "123456@qq.com"
 
 ![image-20221031233525370](./assets/image-20221031233525370.png)
 
-## 测试是否连接成功
+### 测试是否连接成功
 
 测试GitHub是否连接成功：
 
@@ -162,7 +157,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 ![image-20221031234333269](./assets/image-20221031234333269.png)
 
-# 四、关联github
+## 四、关联github
 
 
 
@@ -178,7 +173,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 ![image-20221101162133360](./assets/image-20221101162133360.png)
 
-# 注意
+## 注意
 
 在配置多个账号的，方式有多种，可以使用直接修改文件的方式，也可以使用命令的方式
 
@@ -215,7 +210,7 @@ Hi nxg! You've successfully authenticated, but GITEE.COM does not provide shell 
 
 ![image-20221031235759564](./assets/image-20221031235759564.png)
 
-## 查看账号列表：
+### 查看账号列表：
 
 ```
 git config --global --list
@@ -225,9 +220,7 @@ git config --global --list
 
 ![image-20221101000219730](./assets/image-20221101000219730.png)
 
-
-
-## 添加密钥的方式
+### 添加密钥的方式
 
 方式一：
 
@@ -261,9 +254,7 @@ ssh-keygen -t rsa -C "2011465907@qq.com" -f ~/.ssh/id_rsa
 >
 > 举例说明: 同时指定目录位置、密码、注释信息, 就不需要输入回车键即可完成创建:
 
-# 附件
+## 附件
 
-git单一账号使用教程
-
-![image-20221101205959465](https://gitee.com/hisnxg/typora-picture/raw/master/typora/202211012100103.png)
+[git单一账号使用教程]()
 
