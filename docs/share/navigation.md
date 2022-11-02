@@ -37,3 +37,6 @@ category:
 - [博客园](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.cnblogs.com%2Fmynxg%2F)
 - [简书](https://www.jianshu.com)
 
+## other
+- [文档传输媒介](https://shimo.im/docs/473Qym4eZdsp6G3w/)
+
