@@ -1,6 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import { searchPlugin } from "@vuepress/plugin-search";
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
+import { photoSwipePlugin } from "vuepress-plugin-photo-swipe";
 import theme from "./theme.js";
 
 export default defineUserConfig({
@@ -17,6 +18,7 @@ export default defineUserConfig({
   },
   theme,//已经配置了
   plugins: [
+
     docsearchPlugin({
       appId: "",
       apiKey: "",
@@ -65,6 +67,7 @@ export default defineUserConfig({
         },
       },
     }),
+   
   ],
   shouldPrefetch: false,
 });
