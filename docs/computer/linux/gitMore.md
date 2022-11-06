@@ -8,6 +8,10 @@ category:
   - 运维
 tag:
   - git
+# 此页面会在文章列表置顶
+sticky: true
+# 此页面会出现在文章收藏中
+star: true
 ---
 
 ## 一、背景

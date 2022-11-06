@@ -5,7 +5,7 @@ export const zhNavbar = navbar([
   {
     text:"个人主页",
     icon: "hacker",
-    link: "https://mynxg.github.io/",
+    link: "/README.md",
   },
   {
     text:"博客主页",

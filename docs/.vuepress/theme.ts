@@ -238,6 +238,17 @@ export default hopeTheme({
           },
         ],
       },
+      //允许缓存的最大大小 (以 KB 为单位)
+      maxSize: 2048,
+      //PWA应用主题色，默认绿色
+      themeColor: "#46bd87",
+      //是否缓存图片
+      //图片允许缓存的最大大小 (以 KB 为单位)
+      maxPicSize: 2048,
+      //显示更新内容可用提示，并允许用户立即刷新。当新的 SW 成功注册后，将转为更新内容就绪弹窗
+      //update: "hint",
+      update: "available",
     },
   },
+
 });
