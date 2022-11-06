@@ -1,7 +1,10 @@
+import { getDirname, path } from "@vuepress/utils";
+import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 import { searchPlugin } from "@vuepress/plugin-search";
 import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
+
 
 export default hopeTheme({
   hostname: "https://mynxg.github.io",
@@ -70,11 +73,37 @@ export default hopeTheme({
       "/computer/java/encrypt.html": ["1234"],
     },
   },
+  blog:{
+    //分页
+    articlePerPage: 5,
+    avatar: ".././publi/favicon.ico",
+    name: "所遇所思",
+    medias: {
+      // GitHub 已经内置了图标
+      GitHub: "https://github.com/mynxg",
+      // 一个自定义媒体 MediaX (仅作示例)
+      MediaX: [
+        // 链接
+        "https://mediax.com/UserX/",
+        // 图标 SVG 字符串
+        "<svg ....</svg>",
+      ],
+      // 一个自定义媒体 MediaY (仅作示例)
+      MediaY: [
+        // 链接
+        "https://mediay.com/UserY/",
+        // 图标地址
+        path.resolve(__dirname, "icons/mediay.svg"),
+      ],
+    },
+  },
+  
 
   plugins: {
     // If you don't need comment feature, you can remove following option
     // The following config is for demo ONLY, if you need comment feature, please generate and use your own config, see comment plugin documentation for details.
     // To avoid disturbing the theme developer and consuming his resources, please DO NOT use the following config directly in your production environment!!!!!
+    blog:true,
     //代码一键复制
     copyCode: {
       showInMobile: true,
