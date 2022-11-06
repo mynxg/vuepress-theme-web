@@ -1,18 +1,13 @@
 ---
-home: false
+home: true
 layout: Blog
 icon: home
 title: 博客主页
 heroImage: /logo.png
-heroText: 技术知识整理中
-tagline: 你可以在这里放置或是整个项目的描述。
-actions:
-  - text: 快速了解 💡
-    link: /computer/web/
-    type: primary
-
-  - text: 随记博客
-    link: /post/
+heroText: " "
+bgImage: "https://s1.ax1x.com/2022/11/04/xOAeg0.png"
+bgImageStyle: {height: 25rem}
+heroFullScreen: false
 
 copyright: true
 footer: MIT Licensed | Copyright © 2022-present Mr.keney
