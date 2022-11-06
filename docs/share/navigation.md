@@ -39,6 +39,7 @@ category:
 
 ## 其他博客推荐
 - [Mr.Hope](https://mrhope.site/)
+- [此生挚爱万宝路](https://lingwh1995.github.io/)
 - [文档传输媒介](https://shimo.im/docs/473Qym4eZdsp6G3w/)
 
 

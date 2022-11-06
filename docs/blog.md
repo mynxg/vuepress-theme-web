@@ -1,7 +1,8 @@
 ---
-home: true
+home: false
+layout: Blog
 icon: home
-title: 个人主页
+title: 博客主页
 heroImage: /logo.png
 heroText: 技术知识整理中
 tagline: 你可以在这里放置或是整个项目的描述。
@@ -16,7 +17,3 @@ actions:
 copyright: true
 footer: MIT Licensed | Copyright © 2022-present Mr.keney
 ---
-
-这是一个主页,开发中...
-
-
