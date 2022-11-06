@@ -5,6 +5,7 @@ import { photoSwipePlugin } from "vuepress-plugin-photo-swipe";
 import theme from "./theme.js";
 
 export default defineUserConfig({
+  //不同仓库路径不一样，比如在mynxg的github下有一个mynxg仓库，则base 是这样配置： /mynxg/
   base: "/",
 
   dest: "./dist",
@@ -17,6 +18,15 @@ export default defineUserConfig({
     },
   },
   theme,//已经配置了
+  markdown: {
+    //vuepress解析md标题的深度
+    headers: {
+      level: [1,2,3,4,5]
+    },
+    code: {
+      lineNumbers: false,
+    }
+  },
   plugins: [
 
     docsearchPlugin({
@@ -69,5 +79,6 @@ export default defineUserConfig({
     }),
    
   ],
+  //开启PWA时将这个值设置为false
   shouldPrefetch: false,
 });

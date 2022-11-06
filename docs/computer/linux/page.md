@@ -16,10 +16,7 @@ category:
 tag:
   - 后端
   - linux
-# 此页面会在文章列表置顶
-sticky: true
-# 此页面会出现在文章收藏中
-star: true
+
 ---
 
 `more` 注释之前的内容被视为文章摘要。

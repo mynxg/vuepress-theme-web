@@ -7,7 +7,7 @@ import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 
 export default hopeTheme({
-  hostname: "https://mynxg.github.io",
+  hostname: "mynxg.eu.org",
   //全局的博主信息，所有文章如果不指定authoer就使用下面配置的信息
   author: {
     name: "hisnxg",
