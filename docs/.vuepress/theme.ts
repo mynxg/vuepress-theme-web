@@ -122,6 +122,7 @@ export default hopeTheme({
     // If you don't need comment feature, you can remove following option
     // The following config is for demo ONLY, if you need comment feature, please generate and use your own config, see comment plugin documentation for details.
     // To avoid disturbing the theme developer and consuming his resources, please DO NOT use the following config directly in your production environment!!!!!
+    photoSwipe: true,
     blog: {
        //是否自动抽取文章摘要
        autoExcerpt: true,
@@ -242,34 +243,34 @@ export default hopeTheme({
       cachePic: true,
       appendBase: true,
       apple: {
-        icon: "/assets/icon/apple-icon-152.png",
+        icon: "/favicon.ico",
         statusBarColor: "black",
       },
       msTile: {
-        image: "/assets/icon/ms-icon-144.png",
+        image: "/favicon.ico",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "/assets/icon/chrome-mask-512.png",
+            src: "/favicon.ico",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-mask-192.png",
+            src: "/favicon.ico",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-512.png",
+            src: "/favicon.ico",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-192.png",
+            src: "/favicon.ico",
             sizes: "192x192",
             type: "image/png",
           },
