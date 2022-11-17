@@ -361,10 +361,10 @@ cd ~/mysql
 docker run -id \
 -p 3307:3306 \
 --name=c_mysql \
--v$PWD/conf:/etc/mysql/conf.d \
--v$PWD/logs:/logs \
--v$PWD/data:/var/lib/mysql \
--eMYSQL_ROOT_PASSWORD=123456 \
+-v $PWD/conf:/etc/mysql/conf.d \
+-v $PWD/logs:/logs \
+-v $PWD/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 \
 mysql:5.6
 ```
 
@@ -372,26 +372,128 @@ mysql:5.6
 
 -p  3307:3306：将容器的3306端口映射到宿主机的3307端口。
 
--v $PWD/conf:/etc/mysql/conf.d：将主机当前目录下的conf/my.cnf挂载到容器的 /etc/mysql/my.cnf 。配置目录
+-v  $PWD/conf:/etc/mysql/conf.d：将主机当前目录下的conf/my.cnf挂载到容器的 /etc/mysql/my.cnf 。配置目录
 
--v $PWD/logs:/logs：将主机当前目录下的logs目录挂载到容器的/logs。日志目录
+-v  $PWD/logs:/logs：将主机当前目录下的logs目录挂载到容器的/logs。日志目录
 
--v $PWD/data:/var/lib/mysql：将主机当前目录下的data目录挂载到容器的/var/lib/mysql。数据目录
+-v  $PWD/data:/var/lib/mysql：将主机当前目录下的data目录挂载到容器的/var/lib/mysql。数据目录
 
--e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码。
+-e  MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码。
 
-4.进入容器，操作mysqldockersearchmysqldockerpullmysql:5.6
+4.进入容器，操作
 
 ```
 docker exec -it c_mysql /bin/bash
-mysql -uroot -p123456
+mysql -u root -p123456
 show databases;
 create database db1;
 ```
 
-3.22.Tomcat部署
+3.2.Tomcat部署
 
+1.搜索tomcat镜像
 
+```
+docker search tomcat
+```
+
+2.拉取tomcat镜像
+
+```
+docker pull tomcat
+```
+
+3.创建容器，设置端口映射、目录映射
+
+```
+# 在/root目录下创建tomcat目录用于存储tomcat数据信息
+mkdir ~/tomcat
+```
+
+执行下面的命令：
+
+```
+docker run -id --name=c_tomcat \
+-p 8080:8080 \
+-v $PWD:/usr/local/tomcat/webapps \
+tomcat
+```
+
+参数说明：
+
+-p 8080:8080：将容器的8080端口映射到主机的8080端口
+
+-v $PWD:/usr/local/tomcat/webapps：将主机中当前目录挂载到容器的webapps
+
+4.使用外部机器访问tomcat
+
+3.3.Nginx部署
+
+1.搜索nginx镜像
+
+```
+docker search nginx
+```
+
+2.拉取nginx镜像
+
+```
+docker pull nginx
+```
+
+3.创建容器，设置端口映射、目录映射
+
+```
+# 在root目录下创建nginx目录用于存储nginx数据信息
+mkdir ~/nginx
+cd ~/nginx
+mkdir conf
+cd conf
+#在~/nginx/conf/下创建nginx.conf文件,粘贴下面内容
+vim nginx.conf
+```
+
+执行下面的命令：
+
+```
+user nginx;
+worker_processes 1;
+
+error_log 	/var/log/nginx/error.log warn;
+pid 		/var/run/nginx.pid;
+
+events{
+	worker_connections 1024;
+}
+
+http{
+    include 	/etc/nginx/mime.types;
+    default_type application/octet-stream;
+    log_format	main '$remote_addr-$remote_user[$time_local]"$request"'
+                    '$status$body_bytes_sent"$http_referer"'
+                    '"$http_user_agent""$http_x_forwarded_for"';
+    access_log	/var/log/nginx/access.log main;
+
+    sendfile	on;
+    #tcp_nopush	on;
+
+    keepalive_timeout 65;
+
+    #gzipon;
+    include /etc/nginx/config.d/*.conf;
+}
+```
+
+执行下面的命令：
+
+```
+docker run -id --name=c_nginx \
+-p 80:80 \
+-v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf \
+-v $PWD/logs:/var/log/nginx \
+-v $PWD/html:/usr/share/nginx/html \
+nginx
+```
 
 
 
@@ -405,3 +507,12 @@ create database db1;
 
 参考：https://www.cnblogs.com/yakniu/p/16329611.html
 
+参考：服务端口占用情况：https://www.leixue.com/qa/how-does-centos-check-port-occupancy
+
+参考mysql数据库问题：
+
+【MySql】Navicat 连接数据库出现1251 - Client does not support authentication protocol ...... 问题的解决方法：
+
+https://blog.csdn.net/pengfeng111833/article/details/124399404
+
+https://blog.csdn.net/piupiu78/article/details/122468163
