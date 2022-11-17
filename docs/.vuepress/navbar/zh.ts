@@ -37,6 +37,11 @@ export const zhNavbar = navbar([
         children: ["linux/"],
       },
       {
+        text: "mysql",
+        icon: "config",
+        children: ["mysql/"],
+      },
+      {
         text: "Android",
         icon: "config",
         children: ["android/"],

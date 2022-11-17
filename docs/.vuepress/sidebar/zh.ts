@@ -71,6 +71,16 @@ export const zhSidebar = sidebar({
       //自动生成目录结构
       children: "structure",
     },
+    //数据库
+    {
+      text: "mysql",
+      icon: "note",
+      prefix: "mysql/",
+      //自动收缩
+      collapsable: true,
+      //自动生成目录结构
+      children: "structure",
+    },
     //前端
     {
       text: "web",
