@@ -479,12 +479,12 @@ http{
 
     keepalive_timeout 65;
 
-    #gzipon;
-    include /etc/nginx/config.d/*.conf;
+    #gzip on;
+    include /etc/nginx/conf.d/*.conf;
 }
 ```
 
-执行下面的命令：
+执行下面的命令启动nginx容器：
 
 ```
 docker run -id --name=c_nginx \
@@ -495,11 +495,438 @@ docker run -id --name=c_nginx \
 nginx
 ```
 
+3.4.Redis部署
+
+1.搜索redis镜像
+
+```
+docker search redis
+```
+
+2.拉取redis镜像
+
+```
+docker pull redis:5.0
+```
+
+3.创建容器，设置端口映射
+
+```
+docker run -id --name=c_redis -p 6379:6379 redis:5.0
+```
+
+4.使用外部机器连接redis
+
+```
+./redis-cli.exe -h 192.168.220.12 -p 6379
+keys *
+set name keney
+get name
+```
 
 
 
+## 4.Dockerfile
+
+4.1docker镜像原理：
+
+思考： 
+
+Docker 镜像本质是什么？ 
+
+Docker 中一个centos镜像为什么只有200MB，而一个centos操作系统的iso文件要几个个G？ 
+
+Docker 中一个tomcat镜像为什么有600MB，而一个tomcat安装包只有70多MB？ 
+
+操作系统组成部分： 
+
+进程调度子系统 
+
+进程通信子系统 
+
+内存管理子系统 
+
+设备管理子系统 
+
+文件管理子系统 
+
+网络通信子系统 
+
+作业控制子系统 
+
+Linux文件系统由bootfs和rootfs两部分组成 
+
+bootfs：包含bootloader（引导加载程序）和 kernel（内核） rootfs： root文件系统，包含的就是典型 Linux 系统中的/dev，/proc，/bin，/etc等标准目录和文件 
+
+不同的linux发行版，bootfs基本一样，而rootfs不同，如ubuntu，centos等
+
+![image-20221117193843478](./assets/image-20221117193843478.png)
+
+docker镜像原理 
+
+Docker镜像是由特殊的文件系统叠加而成 
+
+最底端是 bootfs，并使用宿主机的bootfs 
+
+第二层是 root文件系统rootfs,称为base image 然后再往上可以叠加其他的镜像文件 
+
+统一文件系统（Union File System）技术能够将不同的层整合成一个文件系统，为这些层提供了一个统一的 视角，这样就隐藏了多层的存在，在用户的角度看来，只存在一个文件系统。 
+
+一个镜像可以放在另一个镜像的上面。位于下面的镜像称为父镜像，最底部的镜像成为基础镜像。 
+
+当从一个镜像启动容器时，Docker会在最顶层加载一个读写文件系统作为容器
+
+![image-20221117193946995](./assets/image-20221117193946995.png)
+
+回答问题 
+
+1.Docker 镜像本质是什么？ 是一个分层文件系统 
+
+2.Docker 中一个centos镜像为什么只有200MB，而一个centos操作系统的iso文件要几个个G？ 
+
+Centos的iso镜像文件包含bootfs和rootfs，而docker的centos镜像复用操作系统的bootfs，只有rootfs和其 他镜像层
+
+3.Docker 中一个tomcat镜像为什么有600MB，而一个tomcat安装包只有70多MB？ 由于docker中镜像是分层的，tomcat虽然只有70多MB，但他需要依赖于父镜像和基础镜像，所有整个对外 暴露的tomcat镜像大小600多MB
+
+4.2镜像制作
+
+容器转换镜像
+
+```
+docker commit 容器id 镜像名称:版本号
+docker save -o 压缩文件名称 镜像名称:版本号
+docker load –i 压缩文件名称
+```
+
+![image-20221117194250515](./assets/image-20221117194250515.png)
+
+```
+# 创建tomcat镜像
+docker run -id --name=c_tomcat \
+-p 8080:8080 \
+-v $PWD:/usr/local/tomcat/webapps \
+tomcat
+# 进入tomcat镜像
+docker exec -it c_tomcat /bin/bash
+#创建a.txt b.txt
+cd ~
+touch a.txt b.txt
+```
+
+执行操作：
+
+```
+#容器转镜像
+docker commit 28b8d4dc9744 lxs_tomcat:1.0
+#压缩镜像
+docker save -o lxs_tomcat.tar lxs_tomcat:1.0
+#删除原来镜像
+docker rmi lxs_tomcat:1.0
+#从压缩文件加载镜像
+docker load -i lxs_tomcat.tar
+#产生镜像
+docker run -it --name=new_tomcat lxs_tomcat:1.0 /bin/bash
+#进入查看内容
+docker exec -it c_tomcat /bin/bash
+#可以看到a.txt b.txt存在，而webapps/test不存在
+```
+
+dockerfile
+
+概念 
+
+Dockerfile 是一个文本文件 
+
+包含了一条条的指令 
+
+每一条指令构建一层，基于基础镜像，最终构建出一个新的镜像 
+
+对于开发人员：可以为开发团队提供一个完全一致的开发环境 
+
+对于测试人员：可以直接拿开发时所构建的镜像或者通过Dockerfile文件构建一个新的镜像开始工作了 
+
+对于运维人员：在部署时，可以实现应用的无缝移植 
+
+参考Dochub网址：https://hub.docker.com ，比如centos和nginx镜像
+
+| 关键字      | 作用                       | 备注                                                         |
+| ----------- | -------------------------- | ------------------------------------------------------------ |
+| FROM        | 指定父镜像                 | 指定dockerfile基于那个image构建                              |
+| MAINTAINER  | 作者信息 用                | 用来标明这个dockerfile谁写的                                 |
+| LABEL       | 标签                       | 用来标明dockerfile的标签 可以使用Label代替Maintainer 最终都是在 docker image基本信息中可以查看 |
+| RUN         | 容器启动命 令              | 执行一段命令 默认是/bin/sh 格式: RUN command 或者 RUN ["command" , "param1","param2"] |
+| CMD         | 容器启动命 令              | 提供启动容器时候的默认命令 和ENTRYPOINT配合使用.格式 CMD command param1 param2 或者 CMD ["command" , "param1","param2"] |
+| ENTRYPOINT  | 入口                       | 一般在制作一些执行就关闭的容器中会使用                       |
+| COPY        | 复制文件                   | build的时候复制文件到image中                                 |
+| ADD         | 添加文件                   | build的时候添加文件到image中 不仅仅局限于当前build上下文 可以来 源于远程服务 |
+| ENV         | 环境变量                   | 指定build时候的环境变量 可以在启动的容器的时候 通过-e覆盖 格式 ENV name=value |
+| ARG         | 构建参数                   | 构建参数 只在构建的时候使用的参数 如果有ENV 那么ENV的相同名字 的值始终覆盖arg的参数 |
+| VOLUME      | 定义外部可 以挂载的数 据卷 | 指定build的image那些目录可以启动的时候挂载到文件系统中 启动容 器的时候使用 -v 绑定 格式 VOLUME ["目录"] |
+| EXPOSE      | 暴露端口                   | 定义容器运行的时候监听的端口 启动容器的使用-p来绑定暴露端口 格 式: EXPOSE 8080 或者 EXPOSE 8080/udp |
+| WORKDIR     | 工作目录                   | 指定容器内部的工作目录 如果没有创建则自动创建 如果指定/ 使用的是 绝对地址 如果不是/开头那么是在上一条workdir的路径的相对路径 |
+| USER        | 指定执行用 户              | 指定build或者启动的时候 用户 在RUN CMD ENTRYPONT执行的时候 的用户 |
+| HEALTHCHECK | 健康检查                   | 指定监测当前容器的健康监测的命令 基本上没用 因为很多时候 应用本 身有健康监测机制 |
+| ONBUILD     | 触发器                     | 当存在ONBUILD关键字的镜像作为基础镜像的时候 当执行FROM完成 之后 会执行 ONBUILD的命令 但是不影响当前镜像 用处也不怎么大 |
+| STOPSIGNAL  | 发送信号量 到宿主机        | 该STOPSIGNAL指令设置将发送到容器的系统调用信号以退出。       |
+| SHELL       | 指定执行脚 本的shell       | 指定RUN CMD ENTRYPOINT 执行命令的时候 使用的shell            |
+|             |                            |                                                              |
 
 ---
+
+案例一：
+
+自定义centos7镜像。 
+
+要求： 
+
+1. 默认登录路径为 /usr
+2. 可以使用vim 
+
+实现步骤 
+
+定义父镜像：FROM centos:7 
+
+定义作者信息：MAINTAINER lxs lxs@lxs.cn 
+
+执行安装vim命令： RUN yum install -y vim 
+
+定义默认的工作目录：WORKDIR /usr 
+
+定义容器启动执行的命令：CMD /bin/bash 
+
+通过dockerfile构建镜像：docker bulid –f dockerfile文件路径 –t 镜像名称:版本 .
+
+```
+#具体代码
+mkdir ~/docker-files
+cd ~/docker-files
+vim centos_dockerfile
+```
+
+dockerfile具体内容
+
+```
+FROM centos:7
+MAINTAINER lxs <lxs@lxs.cn>
+RUN yum install -y vim
+WORKDIR /usr
+CMD /bin/bash
+```
+
+build
+
+```
+docker build -f ./centos_dockerfile -t lxs_centos:1 .
+```
+
+-f：镜像文件 
+
+-t：新镜像名 
+
+. 寻址路径
+
+```
+#进入看效果
+docker run -it --name=c2 lxs_centos:1
+```
+
+案例二：发布springboot项目 
+
+定义父镜像：FROM java:8
+
+定义作者信息：MAINTAINER lxs lxs@163.com 
+
+将jar包添加到容器： ADD springboot.jar app.jar 
+
+定义容器启动执行的命令：CMD ["java","-jar","app.jar"] 
+
+通过dockerfile构建镜像：docker bulid –f dockerfile文件路径 –t 镜像名称:版本 .
+
+```
+FROM java:8
+MAINTAINER lxs <lxs@163.com>
+ADD springboot.jar app.jar
+CMD ["java","-jar","app.jar"]
+```
+
+build
+
+```
+docker bulid –f ./springboot_dockerfile –t app .
+```
+
+启动容器
+
+```
+docker run -id -p 9000:8080 app
+```
+
+## 5.服务编排
+
+5.1. 概念
+
+微服务架构的应用系统中一般包含若干个微服务，每个微服务一般都会部署多个实例，如果每个微服务都要手动启 动停止，维护的工作量会很大。来看下我们日常工作： 
+
+要从Dockerfile build image 或者去dockerhub拉取image 
+
+要创建多个container 
+
+要管理这些container（启动停止删除） 
+
+通过服务编排可以大量简化上面的工作服务编排：按照一定的业务规则批量管理容器
+
+5.2 Docker Compose
+
+Docker Compose是一个编排多容器分布式部署的工具，提供命令集中管理容器化应用的完整开发周期，包括服务 构建，启动和停止。使用步骤：
+
+1. 利用 Dockerfile 定义运行环境镜像
+2.  使用 docker-compose.yml 定义组成应用的各服务 
+3. 运行 docker-compose up 启动应用
+
+![image-20221117200311623](./assets/image-20221117200311623.png)
+
+安装Docker Compose
+
+```
+# Compose目前已经完全支持Linux、Mac OS和Windows，在我们安装Compose之前，需要先安装Docker。下面我 们以
+编译好的二进制包方式安装在Linux系统中。
+curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-
+`uname -m` -o /usr/local/bin/docker-compose
+# 设置文件可执行权限
+chmod +x /usr/local/bin/docker-compose
+# 查看版本信息
+docker-compose -version
+```
+
+卸载Docker Compose
+
+```
+# 二进制包方式安装的，删除二进制文件即可
+rm /usr/local/bin/docker-compose
+```
+
+编排nginx+springboot
+
+需求：使用nginx反向代理到springboo应用
+
+ 1. 创建docker-compose目录
+
+```
+mkdir ~/docker-compose
+cd ~/docker-compose
+```
+
+2.编写 docker-compose.yml 文件
+
+```
+version: '3'
+services:
+nginx:
+image: nginx
+ports:
+- 80:80
+links:
+- app
+volumes:
+- ./nginx/conf.d:/etc/nginx/conf.d
+app:
+image: app
+expose:
+- "8080"
+```
+
+3.创建./nginx/conf.d目录
+
+```
+mkdir -p ./nginx/conf.d
+```
+
+4.在./nginx/conf.d目录下 编写app.conf文件
+
+```
+server {
+    listen 80;
+    access_log off;
+    
+    location / {
+  	  proxy_pass http://app:8080/hello;
+    }
+}
+
+```
+
+5.在~/docker-compose 目录下 使用docker-compose 启动容器
+
+```
+docker-compose up -d # -d表示已守护模式启动
+```
+
+6. 测试访问
+
+```
+http://192.168.220.12/hello
+```
+
+
+
+## 6.Docker私有仓库
+
+> Docker官方的Docker hub（https://hub.docker.com）是一个用于管理公共镜像的仓库，我们可以从上面拉 取镜像 到本地，也可以把我们自己的镜像推送上去。但是，有时候我们不希望将自己的镜 像放到公网当中， 那么这时我们就需要搭建自己的私有仓库来存储和管理自己的镜像
+
+6.1. 私有仓库搭建
+
+```
+# 1、拉取私有仓库镜像
+docker pull registry
+# 2、启动私有仓库容器
+docker run -id --name=registry -p 5000:5000 registry
+# 3、打开浏览器 输入地址http://私有仓库服务器ip:5000/v2/_catalog，看到{"repositories":[]} 表示私有仓
+库 搭建成功
+# 4、修改daemon.json
+vim /etc/docker/daemon.json
+# 在上述文件中添加一个key，保存退出。此步用于让 docker 信任私有仓库地址；注意将私有仓库服务器ip修改为自
+己私有仓库服务器真实ip
+{"insecure-registries":["私有仓库服务器ip:5000"]}
+{"insecure-registries":["192.168.220.12:5000"]}
+# 5、重启docker 服务
+systemctl restart docker
+docker start registry
+
+```
+
+6.2将镜像上传至私有仓库
+
+```
+# 1、标记镜像为私有仓库的镜像
+docker tag centos:7 192.168.220.12:5000/centos:7
+# 2、上传标记的镜像
+docker push 192.168.220.12:5000/centos:7
+```
+
+从私有仓库拉取镜像
+
+```
+#拉取镜像
+docker pull 192.168.220.12:5000/centos:7
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
